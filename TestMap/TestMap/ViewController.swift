@@ -34,18 +34,13 @@ class ViewController: UIViewController {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped(_:)))
         self.view.addGestureRecognizer(tapRecognizer)
         
-        //DispatchQueue.global().async {
+        DispatchQueue.global().async {
             self.graph.parseJson {
-                //DispatchQueue.main.async {
+                DispatchQueue.main.async {
                     self.drawRoads()
-                //}
+                }
             }
-        //}
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        drawRoads()
+        }
     }
     
     private func drawRoads() {
