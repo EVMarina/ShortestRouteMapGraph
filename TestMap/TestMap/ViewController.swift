@@ -65,8 +65,6 @@ class ViewController: UIViewController {
         currentRoadsLayer.lineWidth = 4
         currentRoadsLayer.path = aPath.cgPath
         
-        // animate it
-        
         self.view.layer.addSublayer(currentRoadsLayer)
     }
     
@@ -109,6 +107,7 @@ class ViewController: UIViewController {
         
         let aPath = UIBezierPath()
         aPath.move(to: Helper.convert(point: firstRoutePoint, size: self.view.bounds.size))
+        
         route.forEach { (point) in
             
             let correctPoint = Helper.convert(point: point, size: self.view.bounds.size)

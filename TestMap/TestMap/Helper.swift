@@ -82,19 +82,19 @@ class Helper {
         return CGPoint(x: point.x * widthRatio, y: point.y * heightRatio)
     }
     
-    class func projection(from p: CGPoint, to line: [CGPoint]) -> CGPoint? {
-        guard let p1 = line.first, let p2 = line.last else { return nil }
+    class func projection(from point: CGPoint, to line: [CGPoint]) -> CGPoint? {
+        guard let point1 = line.first, let point2 = line.last else { return nil }
         
-        let v = CGPoint(x: p2.x - p1.x, y: p2.y - p1.y)
-        var t: CGFloat = (p.x * v.x - p1.x * v.x + p.y * v.y - p1.y * v.y) / (v.x * v.x + v.y * v.y)
+        let v = CGPoint(x: point2.x - point1.x, y: point2.y - point1.y)
+        var t: CGFloat = (point.x * v.x - point1.x * v.x + point.y * v.y - point1.y * v.y) / (v.x * v.x + v.y * v.y)
         if t < 0 { t = 0 }
         else if t > 1 { t = 1 }
-        return CGPoint(x: p1.x + t * v.x, y: p1.y + t * v.y)
+        return CGPoint(x: point1.x + t * v.x, y: point1.y + t * v.y)
     }
 }
 
 
-public extension CGPoint {
+extension CGPoint {
     
     func distance(_ point: CGPoint) -> CGFloat {
         let dx = Float(x - point.x)
@@ -102,7 +102,7 @@ public extension CGPoint {
         return CGFloat(sqrt((dx * dx) + (dy * dy)))
     }
     
-    public static func  ==(lhs: CGPoint, rhs: CGPoint) -> Bool {
+    static func  ==(lhs: CGPoint, rhs: CGPoint) -> Bool {
         return lhs.distance(rhs) < 0.0001
     }
 }

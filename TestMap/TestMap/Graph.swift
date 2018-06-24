@@ -8,56 +8,6 @@
 
 import UIKit
 
-struct Line: Equatable {
-    let line: [CGPoint]
-    let distance: CGFloat
-    
-    public static func == (lhs: Line, rhs: Line) -> Bool {
-        return (lhs.line.first == rhs.line.first && lhs.line.last == rhs.line.last) || (lhs.line.last == rhs.line.first && lhs.line.first == rhs.line.last)
-    }
-}
-
-class Node: Equatable {
-    let point: CGPoint
-    var connections = [Connection]()
-    var visited: Bool = false
-    
-    public init(point: CGPoint) {
-        self.point = point
-    }
-    
-    public static func == (lhs: Node, rhs: Node) -> Bool {
-        return lhs.point == rhs.point
-    }
-}
-
-class Connection {
-    let to: Node
-    let line: Line
-    
-    public init(to node: Node, line: Line) {
-        self.to = node
-        self.line = line
-    }
-}
-
-class Route {
-    let node: Node
-    let weight: CGFloat
-    let previous: Route?
-    
-    init(to: Node, via: Connection? = nil, previous: Route? = nil) {
-        self.node = to
-        self.previous = previous
-        if let previous = previous, let connection = via?.line {
-            self.weight = previous.weight + connection.distance
-        }
-        else {
-            self.weight = 0
-        }
-    }
-}
-
 class Graph: NSObject {
     
     private var points = [CGPoint]()
